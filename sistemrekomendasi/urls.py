@@ -4,6 +4,6 @@ from rekomendasi.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', home, name='home'),
+    path('smartphone/', smartphone, name='smartphone'),
     path('rekomendasi/', rekomendasi, name='rekomendasi'),
 ]

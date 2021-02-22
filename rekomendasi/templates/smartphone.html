@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row pt-4 pl-3">
+      <h4>Daftar Smartphone 2021</h4>
+    </div>
+    <hr>
+    <div class="row">
+      {% for smartphone in smartphones %}
+      <div class="col-md-4 mt-4">
+        {% load static %}
+        <img class="img-fluid" src="{% static 'img/3.png' %}" alt="Card image cap">
+      </div>
+      <div class="col-md-8 mt-4">
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ smartphone.model }}</h5>
+              <hr>
+              <h6 class="card-title"><small>RAM:&nbsp;{{ smartphone.ram }}</small></h6>
+              <h6 class="card-title"><small>CPU&nbsp;:&nbsp;{{ smartphone.cpu }}</small></h6>
+              <h6 class="card-title"><small>OS&nbsp;&nbsp;&nbsp;:&nbsp;{{ smartphone.os }}</small></h6>
+              <h6 class="card-title"><small>ROM:&nbsp;{{ smartphone.storage }}</small></h6>
+            </div>
+            <div class="card-body">
+              <a href="{% url 'rekomendasi' %}" class="card-link">Detail</a>
+            </div>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="container">
+      <div class="row pt-4 justify-content-center">
+          {% if smartphones.has_other_pages %}
+          <ul class="pagination">
+            {% if smartphones.has_previous %}
+              <li><a href="?page={{ smartphones.previous_page_number }}">«</a></li>
+            {% else %}
+              <li class="disabled"><span>«</span></li>
+            {% endif %}
+            {% for i in smartphones.paginator.page_range %}
+              {% if smartphones.number == i %}
+                <li class="active"><span>{{ i }}&nbsp; <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}&nbsp;</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if smartphones.has_next %}
+              <li><a href="?page={{ smartphones.next_page_number }}">»</a></li>
+            {% else %}
+              <li class="disabled"><span>»</span></li>
+            {% endif %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
