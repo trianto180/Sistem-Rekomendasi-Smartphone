@@ -2,56 +2,157 @@
 
 {% block content %}
   <div class="container">
-    <div class="row pt-4 pl-3">
-      <h4>Daftar Smartphone 2021</h4>
-    </div>
-    <hr>
     <div class="row">
-      {% for smartphone in smartphones %}
-      <div class="col-md-4 mt-4">
-        {% load static %}
-        <img class="img-fluid" src="{% static 'img/3.png' %}" alt="Card image cap">
+      <div class="col-8">
+        <div class="pt-4 pl-3">
+          <h4>Daftar Smartphone 2021</h4>
+          {% load static %}
+          <img src="{% static 'img/1.JPG' %}" class="img-fluid" alt="...">
+          <P class="text-justify text-muted pt-4">&nbsp &nbsp &nbsp &nbsp &nbsp 
+            Salah satu kelebihan dari hp keluaran baru tentunya memiliki spesifikasi yang makin canggih dengan fitur dan teknologi yang kekinian. Termasuk berjalan dengan sistem operasi yang paling update juga.
+
+            Tapi tenang, tidak semua hp terbaru dibanderol dengan harga yang tinggi. Karena cukup banyak hp terbaru yang harganya murah, termasuk hp terbaru rilisan 2021.
+            
+            Nah, biar ga penasaran Pricebook akan coba rekomendasikan hp terbaru 2021 dan 2020 apa saja yang harganya masih bisa dijangkau</P>
+        </div>
+        <hr color="secondary">
+        <div class="row pl-3">
+          {% for smartphone in smartphones %}
+          <h4 class="font-weight-bold pt-4 pl-3">{{ smartphone.id }}.{{ smartphone.model}}</h4>
+          <div class="d-flex justify-content-center pt-3">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {% load static %}
+            <img src="{% static 'img/3.png' %}" style="max-width: 400px;" >
+          </div>
+          <div class="col-12 mt-4">
+            <table class="table">
+              <form class="" action="rekomendasi" method="get">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Kriteria</th>
+                  <th scope="col">Spesifikasi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <input type="hidden" name="smartphone_id" value="{{ smartphone.id }}" placeholder="smartphone_id" required id="smartphone_id">
+                  <input type="hidden" name="num_recomm" value=6 placeholder="num_recomm" required id="num_recomm">
+                  <th scope="row">Ram</th>
+                  <td>{{ smartphone.ram }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">CPU</th>
+                  <td>{{ smartphone.cpu }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">GPU</th>
+                  <td>{{ smartphone.gpu }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Storage</th>
+                  <td>{{ smartphone.storage }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">OS</th>
+                  <td>{{ smartphone.os }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Weight</th>
+                  <td>{{ smartphone.weight }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Display</th>
+                  <td>{{ smartphone.display }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Camera</th>
+                  <td>{{ smartphone.camera }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Charger</th>
+                  <td>{{ smartphone.recharge }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <td><button type="submit" id='sub' class="btn btn-primary" name="submit_btn">Smartphone Mirip dengan {{ smartphone.model}}</button></td>
+          </form>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="container">
+          <div class="row pt-4 justify-content-center">
+              {% if smartphones.has_other_pages %}
+              <ul class="pagination">
+                {% if smartphones.has_previous %}
+                  <li><a href="?page={{ smartphones.previous_page_number }}">«</a></li>
+                {% else %}
+                  <li class="disabled"><span>«</span></li>
+                {% endif %}
+                {% for i in smartphones.paginator.page_range %}
+                  {% if smartphones.number == i %}
+                    <li class="active"><span>{{ i }}&nbsp; <span class="sr-only">(current)</span></span></li>
+                  {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}&nbsp;</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if smartphones.has_next %}
+                  <li><a href="?page={{ smartphones.next_page_number }}">»</a></li>
+                {% else %}
+                  <li class="disabled"><span>»</span></li>
+                {% endif %}
+              </ul>
+            {% endif %}
+          </div>
+        </div>
       </div>
-      <div class="col-md-8 mt-4">
-        <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">{{ smartphone.model }}</h5>
-              <hr>
-              <h6 class="card-title"><small>RAM:&nbsp;{{ smartphone.ram }}</small></h6>
-              <h6 class="card-title"><small>CPU&nbsp;:&nbsp;{{ smartphone.cpu }}</small></h6>
-              <h6 class="card-title"><small>OS&nbsp;&nbsp;&nbsp;:&nbsp;{{ smartphone.os }}</small></h6>
-              <h6 class="card-title"><small>ROM:&nbsp;{{ smartphone.storage }}</small></h6>
+      <div class="col-4 pt-4 pl-3">
+        <h5 class="text-muted">Popular Post</h5>
+        <hr>
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              {% load static %}
+              <img class="img-fluid" src="{% static 'img/4.png' %}" alt="Card image cap">
             </div>
-            <div class="card-body">
-              <a href="{% url 'rekomendasi' %}" class="card-link">Detail</a>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Daftar Smartphone 2021</h5>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
             </div>
           </div>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="container">
-      <div class="row pt-4 justify-content-center">
-          {% if smartphones.has_other_pages %}
-          <ul class="pagination">
-            {% if smartphones.has_previous %}
-              <li><a href="?page={{ smartphones.previous_page_number }}">«</a></li>
-            {% else %}
-              <li class="disabled"><span>«</span></li>
-            {% endif %}
-            {% for i in smartphones.paginator.page_range %}
-              {% if smartphones.number == i %}
-                <li class="active"><span>{{ i }}&nbsp; <span class="sr-only">(current)</span></span></li>
-              {% else %}
-                <li><a href="?page={{ i }}">{{ i }}&nbsp;</a></li>
-              {% endif %}
-            {% endfor %}
-            {% if smartphones.has_next %}
-              <li><a href="?page={{ smartphones.next_page_number }}">»</a></li>
-            {% else %}
-              <li class="disabled"><span>»</span></li>
-            {% endif %}
-          </ul>
-        {% endif %}
+        </div>
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              {% load static %}
+              <img class="img-fluid" src="{% static 'img/4.png' %}" alt="Card image cap">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Cara Cek IMEI</h5>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              {% load static %}
+              <img class="img-fluid" src="{% static 'img/4.png' %}" alt="Card image cap">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">3 Fitur Tersembunyi</h5>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

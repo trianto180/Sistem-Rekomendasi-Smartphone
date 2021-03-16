@@ -2,24 +2,25 @@
 
 {% block content %}
   <div class="container">
-    <div class="row">
+    <div class="row pt-4 pl-3 d-flex justify-content-between">
+      <h4>Recommendation For You</h4>
+      <a class="btn btn-success" href="{% url 'smartphone' %}">Back <span class="sr-only">(current)</span></a>
+    </div>
+    <hr>
+    <div class="row pl-4 pr-4">
+      {% for smartphone in smartphones_dict %}
       <div class="col-md-4 mt-4">
+      <div class="card" style="width: 18rem;">
         {% load static %}
-        <img class="card-img-top" src="{% static 'img/2.jpg' %}" alt="Card image cap">
+        <img class="img-fluid pt-4" src="{% static 'img/4.png' %}" alt="Card image cap">
+        <hr>
+        <div class="card-body">
+          <h5 class="card-title">{{ smartphone.smartphone_name }}</h5>
+        </div>
       </div>
-      <div class="col-md-8 mt-4">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Redmi Note 9 Pro</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">RAM : 6</li>
-              <li class="list-group-item">ROM : 128</li>
-              <li class="list-group-item">Battery : 6000 MAh</li>
-            </ul>
-          </div>
-      </div>
+    </div>
+      {% endfor %}
     </div>
   </div>
 {% endblock %}
+
