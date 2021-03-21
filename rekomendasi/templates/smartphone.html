@@ -39,7 +39,7 @@
               <tbody>
                 <tr>
                   <input type="hidden" name="smartphone_id" value="{{ smartphone.id }}" placeholder="smartphone_id" required id="smartphone_id">
-                  <input type="hidden" name="num_recomm" value=6 placeholder="num_recomm" required id="num_recomm">
+                  <input type="hidden" name="num_recomm" value=214 placeholder="num_recomm" required id="num_recomm">
                   <th scope="row">Ram</th>
                   <td>{{ smartphone.ram }}</td>
                 </tr>
@@ -77,7 +77,7 @@
                 </tr>
               </tbody>
             </table>
-            <td><button type="submit" id='sub' class="btn btn-primary" name="submit_btn">Smartphone Mirip dengan {{ smartphone.model}}</button></td>
+            <td><button type="submit" id='sub' class="btn btn-primary" name="submit_btn">Detail</button></td>
           </form>
           </div>
           {% endfor %}
@@ -109,7 +109,16 @@
         </div>
       </div>
       <div class="col-4 pt-4 pl-3">
-        <h5 class="text-muted">Popular Post</h5>
+        <p></p>
+        <form>
+          <div class="input-group pt-4">
+            <input type="text" name="q" placeholder="search" class="form-control form-control-lg" />
+            <div class="input-group-append">
+             <button class="btn btn-dark btn-lg">Search</button>
+            </div>
+          </div>
+        </form>
+        <h5 class="text-muted pt-4">Popular Post</h5>
         <hr>
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row no-gutters">

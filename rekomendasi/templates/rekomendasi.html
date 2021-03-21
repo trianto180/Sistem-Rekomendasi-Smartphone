@@ -2,9 +2,77 @@
 
 {% block content %}
   <div class="container">
+    <div class="row pt-4 pl-3">
+      <h4>Detail</h4>
+    </div>
+    <hr>
+    <div class="row pl-3">
+      {% for smartphone in smart %}
+      <h4 class="font-weight-bold pt-4 pl-3">{{ smartphone.smartphone.model }}</h4>
+      <div class="d-flex justify-content-center pt-3">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% load static %}
+        <img src="{% static 'img/3.png' %}" style="max-width: 400px;" >
+      </div>
+      <div class="col-12 mt-4">
+        <table class="table">
+          <form class="" action="rekomendasi" method="get">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Kriteria</th>
+              <th scope="col">Spesifikasi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <input type="hidden" name="smartphone_id" value="{{ smartphone.id }}" placeholder="smartphone_id" required id="smartphone_id">
+              <input type="hidden" name="num_recomm" value=6 placeholder="num_recomm" required id="num_recomm">
+              <th scope="row">Ram</th>
+              <td>{{ smartphone.smartphone.ram }}</td>
+            </tr>
+            <tr>
+              <th scope="row">CPU</th>
+              <td>{{ smartphone.smartphone.cpu }}</td>
+            </tr>
+            <tr>
+              <th scope="row">GPU</th>
+              <td>{{ smartphone.smartphone.gpu }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Storage</th>
+              <td>{{ smartphone.smartphone.storage }}</td>
+            </tr>
+            <tr>
+              <th scope="row">OS</th>
+              <td>{{ smartphone.smartphone.os }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Weight</th>
+              <td>{{ smartphone.smartphone.weight }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Display</th>
+              <td>{{ smartphone.smartphone.display }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Camera</th>
+              <td>{{ smartphone.smartphone.camera }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Charger</th>
+              <td>{{ smartphone.smartphone.recharge }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {% endfor %}
+    </div>
+    <hr>
     <div class="row pt-4 pl-3 d-flex justify-content-between">
       <h4>Recommendation For You</h4>
-      <a class="btn btn-success" href="{% url 'smartphone' %}">Back <span class="sr-only">(current)</span></a>
     </div>
     <hr>
     <div class="row pl-4 pr-4">
@@ -15,7 +83,13 @@
         <img class="img-fluid pt-4" src="{% static 'img/4.png' %}" alt="Card image cap">
         <hr>
         <div class="card-body">
-          <h5 class="card-title">{{ smartphone.smartphone_name }}</h5>
+          <form class="" action="rekomendasi" method="get">
+          <input type="hidden" name="smartphone_id" value="{{ smartphone.smartphone_id }}" placeholder="smartphone_id" required id="smartphone_id">
+          <input type="hidden" name="num_recomm" value=214 placeholder="num_recomm" required id="num_recomm">
+          <h5 class="card-title">{{ smartphone.smartphone }}</h5>
+          <h6 class="text-justify text-muted">Kemiripan {{ smartphone.cos_sim}}</h6>
+          <button type="submit" id='sub' class="btn btn-primary" name="submit_btn">Get Rekomendasi</button>
+        </form>
         </div>
       </div>
     </div>

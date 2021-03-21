@@ -25,12 +25,8 @@ class Smartphone(models.Model):
         return self.model
 
 class smartphone_recomm(models.Model):
-    smartphone_name=models.CharField(max_length=256)
-    ram = models.CharField(max_length=255)
-    os = models.CharField(max_length=255)
-    cpu = models.CharField(max_length=255)
-    battery = models.CharField(max_length=255)
-    date = models.DateTimeField(default=datetime.now, blank=True)
+    smartphone = models.ForeignKey(Smartphone, on_delete=models.CASCADE, null=True)
+    #date = models.DateTimeField(default=datetime.now, blank=True)
     cos_sim=models.FloatField(null=False)
 
     def __str__(self):
